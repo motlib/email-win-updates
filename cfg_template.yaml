@@ -1,0 +1,19 @@
+# sender e-mail address
+from: andreas
+
+# receiver e-mail address
+to: root@myserver
+
+# smtp server
+server: mysmtpserver
+
+# smtp port, usually 25
+port: 25
+
+# send mail if there are no updates available
+no_updates_mail: True
+
+# search criteria for the windows update searcher
+# Default: 'IsInstalled=0 and IsHidden=0'
+search_criteria: IsInstalled=0 and IsHidden=0
+

@@ -13,29 +13,10 @@ import os
 import smtplib
 import textwrap
 import win32com.client as win32
+import yaml
 
 
-cfg = {
-    # sender e-mail address
-    'from': 'andreas',
-    
-    # receiver e-mail address
-    'to': 'root@myserver',
-    
-    # smtp server
-    'server': 'mysmtpserver',
-    
-    # smtp port, usually 25
-    'port': 25,
-    
-    # send mail if there are no updates available
-    'no_updates_mail': True,
-    
-    # search criteria for the windows update searcher
-    # Default: 'IsInstalled=0 and IsHidden=0'
-    'search_criteria': 'IsInstalled=0 and IsHidden=0'
-}
-
+cfg = None
 
 def get_updates(search_crit):
     '''Get a list of available windows updates.'''
@@ -122,6 +103,9 @@ def main():
     logging.info('Searching for updates...')
 
     try:
+        with open('cfg.yaml', 'r') as f:
+            cfg = yaml.load(f)
+        
         # Check for updates
         updates = get_updates(cfg['search_criteria'])
 
