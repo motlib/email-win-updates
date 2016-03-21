@@ -69,7 +69,7 @@ def send_updates_list_mail(updates):
         body += textwrap.fill(
             update.Description,
             width=70,
-            initial_indent=='  ',
+            initial_indent='  ',
             subsequent_indent='  ')
         body += '\n\n'
 
