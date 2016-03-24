@@ -77,7 +77,8 @@ def send_mail(body):
 
     text = title
     text += body
-
+    text += '\n\nSee http://github.com/motlib/email-win-updates for more info.'
+    
     msg = MIMEText(text)
 
     msg['Subject'] = title
