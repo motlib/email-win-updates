@@ -1,19 +1,29 @@
-# sender e-mail address
-from: andreas
+# Template configuration for email-win-updates.py
+#
+# Please copy and ajust values as needed.
 
-# receiver e-mail address
+# Sender e-mail address
+from: updatecheck
+
+# Receiver e-mail addresses.
+#
+# You can provide addresses as comma-separated string:
+#   to: abc@myhost, def@myhost
+# or as yaml list:
+#   to: [abc@myhost, def@myhost]
 to: root@myserver
 
-# smtp server
+# The SMTP server hostname
 server: mysmtpserver
 
-# smtp port, usually 25
+# The SMTP port, usually 25
 port: 25
 
-# send mail if there are no updates available
+# Send out a mail even if there are no updates available.
 no_updates_mail: True
 
-# search criteria for the windows update searcher
+# Search criteria for the windows update searcher
+#
 # Default: 'IsInstalled=0 and IsHidden=0'
 search_criteria: IsInstalled=0 and IsHidden=0
 
