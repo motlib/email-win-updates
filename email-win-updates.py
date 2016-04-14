@@ -63,15 +63,25 @@ class EmailWinUpdates():
         body = 'The following windows updates are available:\n\n'
     
         for update in updates:
-            body += '* {sev}: {title}\n'.format(
+
+            title = '* {sev}: {title}'.format(
                 sev=update.MsrcSeverity.upper(),
                 title=update.Title)
+            
+            body += textwrap.fill(
+                title,
+                width=70,
+                initial_indent='',
+                subsequent_indent='  ')
+            
+            body += '\n\n'
+
             body += textwrap.fill(
                 update.Description,
                 width=70,
                 initial_indent='  ',
                 subsequent_indent='  ')
-            body += '\n\n'
+            body += '\n\n\n'
     
         self.send_mail(body)
     
