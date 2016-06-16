@@ -20,10 +20,13 @@ import textwrap
 import win32com.client as win32
 import yaml
 
+from cmdlapp import CmdlApp
 
-class EmailWinUpdates():
+class EmailWinUpdates(CmdlApp):
     def __init__(self):
         self.cfg = None
+
+        self.cmdlapp_config(has_cfgfile=True)
 
         
     def get_updates(self, search_crit):
@@ -144,33 +147,10 @@ class EmailWinUpdates():
         self.args = parser.parse_args()
         
         
-    def load_config(self):
-        '''Load the config file cfg.yaml from the current directory.'''
-        
-        try:
-            with open('cfg.yaml', 'r') as f:
-                self.cfg = yaml.load(f)
-        except:
-            # If we cannot open the config, we cannot send a mail to tell
-            # about if. So just log it and give up.
-            logging.exception('Failed to open config file.')
-            
-            sys.exit(1)
-        
-        
-    def run(self):
+    def main_fct(self):
         '''Program entry point. 
     
         Search for updates and send out mail with result.'''
-        
-        logging.basicConfig(
-            level=logging.INFO,
-            format='%(asctime)s %(levelname)s: email-win-updates: %(message)s')
-        
-
-        self.parse_args()
-        
-        self.load_config()
         
         try:
             # Check for updates
