@@ -145,6 +145,35 @@ class EmailWinUpdates(CmdlApp):
             default='cfg.yaml')
         
         self.args = parser.parse_args()
+
+
+    def handle_updates(self, updates):
+        '''Take action according to the number of updates found and the 
+        configuration settings.'''
+        
+        if len(updates) > 0:
+            # There are updates available. Sent out mail.
+            
+            msg = 'Found {num} updates. Sending info mail.'
+            logging.info(msg.format(num=len(updates)))
+            
+            # send list of updates
+            self.send_updates_list_mail(updates)
+
+        else:
+            # There are no updates available.
+
+            if self.cfg['no_updates_mail']:
+                # Send mail to tell that no updates are available.
+
+                logging.info('No updates found. Sending info mail.')
+
+                self.send_no_updates_mail()
+            else:
+                # There are no updates and the user does not want
+                # to know.
+            
+                logging.info('No updates found. No mail sent.')
         
         
     def main_fct(self):
@@ -157,13 +186,8 @@ class EmailWinUpdates(CmdlApp):
             logging.info('Searching for updates...')
             updates = self.get_updates(self.cfg['search_criteria'])
     
-            if len(updates) == 0 and self.cfg['no_updates_mail']:
-                # Send mail to tell about no updates available.
-                self.send_no_updates_mail()
-            else:
-                # send list of updates
-                self.send_updates_list_mail(updates)
-                
+            self.handle_updates(updates)
+            
         except Exception as ex:
             self.send_update_check_error_mail(ex)
             logging.exception('Failed to check for windows updates')
