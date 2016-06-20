@@ -132,21 +132,6 @@ class EmailWinUpdates(CmdlApp):
         logging.info('Sent mail to these recipients: {0}'.format(recipients))
 
 
-    def parse_args(self):
-        '''Parse the command-line arguments.'''
-        
-        parser = argparse.ArgumentParser(
-            description='Check for available Windows Updates and send result ' \
-                'by mail.')
-
-        parser.add_argument(
-            '--cfg',
-            help='Path to the config file.',
-            default='cfg.yaml')
-        
-        self.args = parser.parse_args()
-
-
     def handle_updates(self, updates):
         '''Take action according to the number of updates found and the 
         configuration settings.'''
