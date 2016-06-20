@@ -178,8 +178,6 @@ class EmailWinUpdates(CmdlApp):
             self.send_update_check_error_mail(ex)
             logging.exception('Failed to check for windows updates.')
             
-            sys.exit(1)
-    
             
 if __name__ == '__main__':
     ewu = EmailWinUpdates()
