@@ -173,14 +173,13 @@ class EmailWinUpdates(CmdlApp):
     
             self.handle_updates(updates)
             
+            logging.info('Check for updates completed.')
         except Exception as ex:
             self.send_update_check_error_mail(ex)
-            logging.exception('Failed to check for windows updates')
+            logging.exception('Failed to check for windows updates.')
             
             sys.exit(1)
     
-        logging.info('Check for updates completed.')
-        
             
 if __name__ == '__main__':
     ewu = EmailWinUpdates()
